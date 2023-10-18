@@ -1,5 +1,5 @@
 
--- Use PolyBase to load public data from Azure blob storage into the Contoso Retail Data Warehouse schema.
+-- Use PolyBase to load public data from Azure Blob Storage into the Contoso Retail Data Warehouse schema.
 --
 -- This script:
 -- 
@@ -18,7 +18,7 @@
 
 
 -- Create an external data source
--- TYPE: HADOOP - PolyBase uses Hadoop APIs to access data in Azure blob storage.
+-- TYPE: HADOOP - PolyBase uses Hadoop APIs to access data in Azure Blob Storage.
 -- LOCATION: Provide Azure storage account name and blob container name.
 -- CREDENTIAL: Provide the credential created in the previous step.
 
@@ -30,7 +30,7 @@ WITH
 ); 
 GO
 
--- The data is stored in text files in Azure blob storage, and each field is separated with a delimiter. 
+-- The data is stored in text files in Azure Blob Storage, and each field is separated with a delimiter. 
 -- Run this [CREATE EXTERNAL FILE FORMAT][] command to specify the format of the data in the text files. 
 -- he Contoso data is uncompressed and pipe delimited.
 
@@ -52,7 +52,7 @@ GO
 
 
 -- Now let's create the external tables. All we are doing here is defining column names and data types, 
--- and binding them to the location and format of the Azure blob storage files. The location is the folder 
+-- and binding them to the location and format of the Azure Blob Storage files. The location is the folder 
 -- under the root directory of the Azure Storage Blob.
 
 --DimAccount
@@ -779,7 +779,7 @@ WITH
 
 -- Load the data with CTAS
 --
--- The easiest and most efficient way to load data from Azure blob storage is to usu
+-- The easiest and most efficient way to load data from Azure Blob Storage is to usu
 -- Create Table As Select (CTAS). Loading with CTAS leverages the strongly typed 
 -- external tables you have just created.
 
@@ -818,6 +818,7 @@ CREATE TABLE [cso].[FactOnlineSales]       WITH (DISTRIBUTION = HASH([ProductKey
 CREATE TABLE [cso].[FactSales]             WITH (DISTRIBUTION = HASH([ProductKey]  ) ) AS SELECT * FROM [asb].[FactSales]              OPTION (LABEL = 'CTAS : Load [cso].[FactSales]              ');
 CREATE TABLE [cso].[FactSalesQuota]        WITH (DISTRIBUTION = HASH([ProductKey]  ) ) AS SELECT * FROM [asb].[FactSalesQuota]         OPTION (LABEL = 'CTAS : Load [cso].[FactSalesQuota]         ');
 CREATE TABLE [cso].[FactStrategyPlan]      WITH (DISTRIBUTION = HASH([EntityKey])  )   AS SELECT * FROM [asb].[FactStrategyPlan]       OPTION (LABEL = 'CTAS : Load [cso].[FactStrategyPlan]       ');
+CREATE TABLE [cso].[FactExchangeRate]      WITH (DISTRIBUTION = HASH([ExchangeRateKey])  ) AS SELECT * FROM [asb].[FactExchangeRate]    OPTION (LABEL = 'CTAS : Load [cso].[FactExchangeRate]       ');
 
 
 -- Track the load progress
@@ -864,6 +865,7 @@ ALTER INDEX ALL ON [cso].[FactInventory]            REBUILD;
 ALTER INDEX ALL ON [cso].[FactOnlineSales]          REBUILD;
 ALTER INDEX ALL ON [cso].[FactSales]                REBUILD;
 ALTER INDEX ALL ON [cso].[FactSalesQuota]           REBUILD;
+ALTER INDEX ALL ON [cso].[FactExchangeRate]         REBUILD;
 
 
 -- Optimize statistics
@@ -1193,7 +1195,6 @@ CREATE STATISTICS [stat_cso_FactOnlineSales_OnlineSalesKey] ON [cso].[FactOnline
 CREATE STATISTICS [stat_cso_FactOnlineSales_ProductKey] ON [cso].[FactOnlineSales]([ProductKey]);
 CREATE STATISTICS [stat_cso_FactOnlineSales_PromotionKey] ON [cso].[FactOnlineSales]([PromotionKey]);
 CREATE STATISTICS [stat_cso_FactOnlineSales_StoreKey] ON [cso].[FactOnlineSales]([StoreKey]);
-```
 
 -- Achievement unlocked!
 --
