@@ -1,6 +1,9 @@
-#SQL Security
+# SQL Security
 
-<!--laceholder for summary.--> 
+<!--placeholder for summary.--> 
+[Ledger Demos](ledger)
+
+[Always Encrypted with secure enclaves Demos](always-encrypted-with-secure-enclaves)
 
 [Azure Active Directory Authentication Demos](azure-active-directory-auth)
 
