@@ -363,7 +363,7 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.29",
+            "version": "6.20.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
@@ -382,7 +382,7 @@
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
                 "jeremeamia/superclosure": "~2.0",
-                "league/flysystem": "~1.0",
+                "league/flysystem": "~1.1.4",
                 "monolog/monolog": "~1.11",
                 "mtdowling/cron-expression": "~1.0",
                 "nesbot/carbon": "~1.19",
@@ -621,6 +621,7 @@
                 "sftp",
                 "storage"
             ],
+            "time": "2015-12-19T20:16:43+00:00"
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
                 "source": "https://github.com/thephpleague/flysystem/tree/1.1.4"
